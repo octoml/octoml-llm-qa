@@ -1,6 +1,6 @@
-langchain==0.0.163
-llama_index==0.6.4
-pydantic==1.10.5
-python-dotenv==1.0.0
-Requests==2.30.0
+langchain
+llama_index
+pydantic
+python-dotenv
+Requests
 sentence-transformers
