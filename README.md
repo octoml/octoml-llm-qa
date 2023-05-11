@@ -1,4 +1,4 @@
-# Dolly endpoint chat
+# LLM endpoint chat
 
 Load a PDF file and ask questions via llama_index, LangChain and a DollyV2 endpoint hosted on the OctoAI.Cloud
 
