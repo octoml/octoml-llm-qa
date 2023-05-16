@@ -7,7 +7,7 @@ Load a PDF file and ask questions via llama_index, LangChain and a DollyV2 endpo
 - Install the requirements
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt -U
 ```
 
 - Clone the dolly-demo template by visiting <https://octoai.cloud/templates/dolly-demo> then clicking "Clone Template"
