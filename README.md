@@ -1,6 +1,6 @@
 # LLM endpoint chat
 
-Load a PDF file and ask questions via llama_index, LangChain and a DollyV2 endpoint hosted on the OctoAI.Cloud
+Load a PDF file and ask questions via llama_index, LangChain and a LLM endpoint 
 
 ## Instructions
 
@@ -10,30 +10,14 @@ Load a PDF file and ask questions via llama_index, LangChain and a DollyV2 endpo
 pip install -r requirements.txt -U
 ```
 
-- Clone the dolly-demo template by visiting <https://octoai.cloud/templates/dolly-demo> then clicking "Clone Template"
-
-- Paste your Endpoint URL in a file called `.env` in the root directory of the project.
-
-```bash
-Endpoint_URL=<your Endpoint URL here>
-```
-
-- Get an OctoAI Cloud API Token from [Octoai.cloud](https://octoai.cloud/settings).
-
-- Paste your API key in a file called `.env` in the root directory of the project.
-
-```bash
-OCTOAI_API_TOKEN=<your key here>
-```
-
-- Run `chat_main.py` script to chat with the Dolly hosted endpoint.
+- Run `chat_main.py` script to chat with the LLM hosted endpoint.
 ```bash
 python3 chat_main.py
 ```
 
 or 
 - Select a file from the menu or replace the default file `file.pdf` with the PDF you want to use.
-- Run `pdf_qa_main.py` script to ask questions about your pdf file via llama_index, LangChain and the Dolly hosted endpoint on OctoAI cloud.
+- Run `pdf_qa_main.py` script to ask questions about your pdf file via llama_index, LangChain and the hosted endpoint.
 ```
 python3 pdf_qa_main.py
 ```
