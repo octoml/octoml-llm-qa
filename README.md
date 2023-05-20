@@ -26,19 +26,17 @@ Endpoint_URL=<your Endpoint URL here>
 OCTOAI_API_TOKEN=<your key here>
 ```
 
-- Select a file from the menu or replace the default file `file.pdf` with the PDF you want to use.
-
 - Run `chat_main.py` script to chat with the Dolly hosted endpoint.
-- Run `pdf_qa_main.py` script to ask questions about your pdf file via llama_index, LangChain and the Dolly hosted endpoint on OctoAI cloud.
-
 ```bash
 python3 chat_main.py
 ```
+
 or 
+- Select a file from the menu or replace the default file `file.pdf` with the PDF you want to use.
+- Run `pdf_qa_main.py` script to ask questions about your pdf file via llama_index, LangChain and the Dolly hosted endpoint on OctoAI cloud.
 ```
 python3 pdf_qa_main.py
 ```
-
 - Ask any questions about the content of the PDF. 
 <br>
 <br>
