@@ -5,6 +5,7 @@ import sys
 from dotenv import load_dotenv
 from OctoAiCloudLLM import OctoAiCloudLLM
 from langchain import LLMChain, PromptTemplate
+from termios import tcflush, TCIFLUSH
 
 # Get the current file's directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -54,6 +55,7 @@ def ask():
     print("Example \n\nPrompt:", example_question, "\n\nResponse:", llm_chain.run(example_question))
         
     try:
+        tcflush(sys.stdin, TCIFLUSH)
         while True:
             # Collect user's prompt
             user_prompt = input("\nPrompt: ")
