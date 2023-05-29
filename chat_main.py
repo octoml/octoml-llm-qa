@@ -5,7 +5,6 @@ import sys
 from dotenv import load_dotenv
 from OctoAiCloudLLM import OctoAiCloudLLM
 from langchain import LLMChain, PromptTemplate
-from llama_index import LLMPredictor
 
 # Get the current file's directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -36,7 +35,6 @@ def ask():
 
     # Set up the language model and predictor
     llm = OctoAiCloudLLM(endpoint_url=endpoint_url)
-    llm_predictor = LLMPredictor(llm=llm)
 
     # Define a prompt template
     template = "{question}"
