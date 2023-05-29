@@ -5,6 +5,7 @@ import sys
 from dotenv import load_dotenv
 from OctoAiCloudLLM import OctoAiCloudLLM
 from langchain import LLMChain, PromptTemplate
+import time
 from termios import tcflush, TCIFLUSH
 
 # Get the current file's directory
@@ -63,9 +64,12 @@ def ask():
                 handle_exit()
 
             # Generate and print the response
+            start_time = time.time()
             response = llm_chain.run(user_prompt)
+            end_time = time.time()
+            elapsed_time = end_time-start_time
             response = str(response).lstrip("\n")
-            print("Response: " + response)
+            print(f"Response({round(elapsed_time,1)} sec): " + response)
     except KeyboardInterrupt:
         handle_exit()
 
