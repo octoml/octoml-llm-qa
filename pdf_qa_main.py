@@ -8,6 +8,9 @@ from OctoAiCloudLLM import OctoAiCloudLLM
 from langchain import HuggingFaceHub, OpenAI, PromptTemplate, LLMChain
 from langchain.embeddings import HuggingFaceEmbeddings
 from llama_index import ( LLMPredictor, ServiceContext, download_loader, GPTVectorStoreIndex, LangchainEmbedding)
+import time
+from termios import tcflush, TCIFLUSH
+
 # Get the current file's directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
 # Change the current working directory
@@ -77,18 +80,22 @@ def ask(file):
     print("Press Ctrl+C to exit")
 
     try:
+        tcflush(sys.stdin, TCIFLUSH)
         while True:
             prompt = input("\nPrompt: ")
             if prompt == "exit":
                 handle_exit()
 
+            start_time = time.time()
             response = query_engine.query(prompt)
+            end_time = time.time()
+            elapsed_time = end_time-start_time              
             print()
 
             # Transform response to string and remove leading newline character if present
             response = str(response).lstrip("\n")
 
-            print("Response: " + response)
+            print(f"Response({round(elapsed_time,1)} sec): " + response)
     except KeyboardInterrupt:
         handle_exit()
 
