@@ -4,3 +4,4 @@ pydantic
 python-dotenv
 Requests
 sentence-transformers
+termios
