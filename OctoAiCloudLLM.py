@@ -80,7 +80,7 @@ class OctoAiCloudLLM(LLM):
                 self.endpoint_url, headers=headers, json=parameter_payload
             )
         except requests.exceptions.RequestException as e:
-            raise ValueError(f"Error raised by inference endpoint: {e}")
+            raise ValueError(f"Error raised by inference endpoint: {e}") from e
 
         # Extract the generated text
         generated_text = response.json()

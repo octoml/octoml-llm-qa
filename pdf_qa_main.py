@@ -89,13 +89,13 @@ def ask(file):
             start_time = time.time()
             response = query_engine.query(prompt)
             end_time = time.time()
-            elapsed_time = end_time-start_time              
+            elapsed_time = end_time-start_time
             print()
 
             # Transform response to string and remove leading newline character if present
             response = str(response).lstrip("\n")
 
-            print(f"Response({round(elapsed_time,1)} sec): " + response)
+            print(f"Response({round(elapsed_time, 1)} sec): {response}")
     except KeyboardInterrupt:
         handle_exit()
 
@@ -116,7 +116,7 @@ def select_file():
     print()
 
     try:
-        possible_selections = [i for i in range(len(files) + 1)]
+        possible_selections = list(range(len(files) + 1))
         selection = int(input("Enter a number, or 0 to exit: "))
 
         if selection == 0:
@@ -134,9 +134,7 @@ def select_file():
 if __name__ == "__main__":
     # Initialize the file directory
     init()
-    # Prompt user to select a file
-    file = select_file()
-    if file:
+    if file := select_file():
         # Start the interactive query session
         ask(file)
     else:
