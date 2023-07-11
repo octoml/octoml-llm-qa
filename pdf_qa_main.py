@@ -4,10 +4,12 @@ import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
-from OctoAiCloudLLM import OctoAiCloudLLM
-from langchain import HuggingFaceHub, OpenAI, PromptTemplate, LLMChain
-from langchain.embeddings import HuggingFaceEmbeddings
-from llama_index import ( LLMPredictor, ServiceContext, download_loader, GPTVectorStoreIndex, LangchainEmbedding)
+
+from langchain.llms.octoai_endpoint import OctoAIEndpoint as OctoAiCloudLLM
+from langchain.embeddings.octoai_embeddings import OctoAIEmbeddings
+from llama_index import (LLMPredictor, ServiceContext,
+                         download_loader, GPTVectorStoreIndex, LangchainEmbedding)
+
 import time
 from termios import tcflush, TCIFLUSH
 
@@ -53,16 +55,26 @@ def ask(file):
 
     # Initialize the OctoAiCloudLLM
     endpoint_url = os.getenv("ENDPOINT_URL")
-    llm = OctoAiCloudLLM(endpoint_url=endpoint_url)
+    llm=OctoAiCloudLLM(endpoint_url=endpoint_url,
+                    model_kwargs={
+                        "max_new_tokens": 200,
+                        "temperature": 0.75,
+                        "top_p": 0.95,
+                        "repetition_penalty": 1,
+                        "seed": None,
+                        "stop": [],
+                    },
+                    )
+
     llm_predictor = LLMPredictor(llm=llm)
 
     # Create the LangchainEmbedding
-    embeddings = LangchainEmbedding(
-        HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2"))
+    embeddings = LangchainEmbedding(OctoAIEmbeddings(
+        endpoint_url="https://instruct-f1kzsig6xes9.octoai.cloud/predict"))
 
     # Create the ServiceContext
     service_context = ServiceContext.from_defaults(
-        llm_predictor=llm_predictor, chunk_size_limit=1024, embed_model=embeddings)
+        llm_predictor=llm_predictor, chunk_size_limit=512, embed_model=embeddings)
 
     # Create the index from documents
     index = GPTVectorStoreIndex.from_documents(
