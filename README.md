@@ -1,6 +1,6 @@
 # LLM endpoint chat
 
-Load a PDF file and ask questions via llama_index, LangChain and a LLM endpoint 
+Load a PDF file and ask questions via llama_index, LangChain and a LLM endpoint hosted on OctoAI
 
 ## Instructions
 
@@ -22,6 +22,10 @@ or
 python3 pdf_qa_main.py
 ```
 - Ask any questions about the content of the PDF. 
+<br>
+
+
+For detailed setup steps, please see https://docs.octoai.cloud/docs/setup-steps-for-the-qa-app
 <br>
 <br>
 
