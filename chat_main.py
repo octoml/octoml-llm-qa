@@ -3,8 +3,9 @@ import logging
 import os
 import sys
 from dotenv import load_dotenv
-from OctoAiCloudLLM import OctoAiCloudLLM
-from langchain import LLMChain, PromptTemplate
+from langchain.llms.octoai_endpoint import OctoAIEndpoint as OctoAiCloudLLM
+from langchain import PromptTemplate, LLMChain
+
 import time
 from termios import tcflush, TCIFLUSH
 
@@ -36,7 +37,17 @@ def ask():
     endpoint_url = os.getenv("ENDPOINT_URL")
 
     # Set up the language model and predictor
-    llm = OctoAiCloudLLM(endpoint_url=endpoint_url)
+    llm = OctoAiCloudLLM(endpoint_url=endpoint_url,   
+                         model_kwargs={
+            "max_new_tokens": 200,
+            "temperature": 0.75,
+            "top_p": 0.95,
+            "repetition_penalty": 1,
+            "seed": None,
+            "stop": [],
+            },
+        )
+    
 
     # Define a prompt template
     template = "{question}"
