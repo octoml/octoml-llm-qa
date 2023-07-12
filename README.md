@@ -9,12 +9,12 @@ Load a PDF file and ask questions via llama_index, LangChain and a LLM endpoint 
 ```bash
 pip install -r requirements.txt -U
 ```
-# Environment setup
+### Environment setup
 
 To run our example app, there are four simple steps to take:
 
 - Clone the Falcon-7b demo template to your OctoAI account by visiting <https://octoai.cloud/templates/falcon-7b-demo> then clicking "Clone Template." 
-   - If you want to use a different LLM model you can select another demo [template](https://octoai.cloud/templates). You can also containerize the model and make a custom OctoAI endpoint yourself, by following [Build a Container from Python](doc:create-custom-endpoints-from-python-code) and [Create a Custom Endpoint from a Container](doc:create-custom-endpoints-from-a-container)
+   - If you want to use a different LLM model you can select another demo [template](https://octoai.cloud/templates). You can also containerize the model and make a custom OctoAI endpoint yourself, by following [Build a Container from Python]<https://docs.octoai.cloud/docs/create-custom-endpoints-from-python-code> and [Create a Custom Endpoint from a Container]<https://docs.octoai.cloud/docs/create-custom-endpoints-from-a-container>
 -  Paste your Endpoint URL in a file called `.env` in the root directory of the project.
 
 ```bash
