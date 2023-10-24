@@ -4,4 +4,6 @@ pydantic
 python-dotenv
 Requests
 sentence-transformers
+transformers
 termios
+octoai-sdk
