@@ -7,8 +7,13 @@ from dotenv import load_dotenv
 
 from langchain.llms.octoai_endpoint import OctoAIEndpoint as OctoAiCloudLLM
 from langchain.embeddings.octoai_embeddings import OctoAIEmbeddings
-from llama_index import (LLMPredictor, ServiceContext,
-                         download_loader, GPTVectorStoreIndex, LangchainEmbedding)
+from llama_index import (
+    LLMPredictor,
+    ServiceContext,
+    download_loader,
+    GPTVectorStoreIndex,
+    LangchainEmbedding,
+)
 
 import time
 from termios import tcflush, TCIFLUSH
@@ -55,34 +60,44 @@ def ask(file):
 
     # Initialize the OctoAiCloudLLM
     endpoint_url = os.getenv("ENDPOINT_URL")
-    llm=OctoAiCloudLLM(endpoint_url=endpoint_url,
-                    model_kwargs={
-                        "max_new_tokens": 200,
-                        "temperature": 0.75,
-                        "top_p": 0.95,
-                        "repetition_penalty": 1,
-                        "seed": None,
-                        "stop": [],
-                    },
-                    )
+    # Set up the language model and predictor
+    llm = OctoAiCloudLLM(
+        endpoint_url=endpoint_url,
+        model_kwargs={
+        "model": "llama-2-7b-chat",
+        "messages": [
+            {
+                "role": "system",
+                "content": "Below is an instruction that describes a task. Write a response that appropriately completes the request."
+            }
+        ],
+        "stream": False,
+        "max_tokens": 256
+        }
+    )
+
 
     llm_predictor = LLMPredictor(llm=llm)
 
     # Create the LangchainEmbedding
-    embeddings = LangchainEmbedding(OctoAIEmbeddings(
-        endpoint_url="https://instruct-f1kzsig6xes9.octoai.cloud/predict"))
+    embeddings = LangchainEmbedding(
+        OctoAIEmbeddings(
+            endpoint_url="https://instructor-large-f1kzsig6xes9.octoai.run/predict"
+        )
+    )
 
     # Create the ServiceContext
     service_context = ServiceContext.from_defaults(
-        llm_predictor=llm_predictor, chunk_size_limit=512, embed_model=embeddings)
+        llm_predictor=llm_predictor, chunk_size_limit=512, embed_model=embeddings
+    )
 
     # Create the index from documents
     index = GPTVectorStoreIndex.from_documents(
-        documents, service_context=service_context)
+        documents, service_context=service_context
+    )
 
     # Create the query engine
-    query_engine = index.as_query_engine(
-        verbose=True, llm_predictor=llm_predictor)
+    query_engine = index.as_query_engine(verbose=True, llm_predictor=llm_predictor)
 
     # Clear the screen
     os.system("clear")
@@ -95,13 +110,15 @@ def ask(file):
         tcflush(sys.stdin, TCIFLUSH)
         while True:
             prompt = input("\nPrompt: ")
+            if prompt is None:
+                continue
             if prompt == "exit":
                 handle_exit()
 
             start_time = time.time()
             response = query_engine.query(prompt)
             end_time = time.time()
-            elapsed_time = end_time-start_time
+            elapsed_time = end_time - start_time
             print()
 
             # Transform response to string and remove leading newline character if present
@@ -136,13 +153,13 @@ def select_file():
         elif selection not in possible_selections:
             select_file()
         else:
-            file_path = os.path.abspath(
-                os.path.join(FILES, files[selection - 1]))
+            file_path = os.path.abspath(os.path.join(FILES, files[selection - 1]))
 
         return file_path
     except ValueError:
         return select_file()
-    
+
+
 if __name__ == "__main__":
     # Initialize the file directory
     init()

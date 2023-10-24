@@ -13,7 +13,7 @@ pip install -r requirements.txt -U
 
 To run our example app, there are four simple steps to take:
 
-- Clone the Falcon-7b demo template to your OctoAI account by visiting <https://octoai.cloud/templates/falcon-7b-demo> then clicking "Clone Template." 
+- Clone the Llama-2-7b demo template to your OctoAI account by visiting <https://octoai.cloud/models/llama-2-7b-chat-demo> then clicking "Deploy Endpoint."
    - If you want to use a different LLM model you can select another demo [template](https://octoai.cloud/templates). You can also containerize the model and make a custom OctoAI endpoint yourself, by following [Build a Container from Python]<https://docs.octoai.cloud/docs/create-custom-endpoints-from-python-code> and [Create a Custom Endpoint from a Container]<https://docs.octoai.cloud/docs/create-custom-endpoints-from-a-container>
 -  Paste your Endpoint URL in a file called `.env` in the root directory of the project.
 
